@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { css } from '@emotion/core'
 import { AddCircle, RemoveCircle } from '@material-ui/icons'
 import { Typography, IconButton } from '@material-ui/core'
@@ -13,10 +14,10 @@ const container = css`
 export default function Skill({
   name,
   points,
-  minPoints,
   onAdd,
   onRemove,
-  availablePoints
+  disableRemove,
+  disableAdd
 }) {
   return (
     <div css={container}>
@@ -24,7 +25,7 @@ export default function Skill({
         name={name}
         aria-label="remove"
         onClick={() => onRemove(name)}
-        disabled={points === minPoints}
+        disabled={disableRemove}
       >
         <RemoveCircle />
       </IconButton>
@@ -46,10 +47,19 @@ export default function Skill({
         name={name}
         aria-label="add"
         onClick={() => onAdd(name)}
-        disabled={availablePoints === 0}
+        disabled={disableAdd}
       >
         <AddCircle />
       </IconButton>
     </div>
   )
+}
+
+Skill.propTypes = {
+  name: PropTypes.string.isRequired,
+  points: PropTypes.number.isRequired,
+  onAdd: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  disableRemove: PropTypes.bool,
+  disableAdd: PropTypes.bool
 }

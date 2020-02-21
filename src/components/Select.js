@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   FormControl,
   FormHelperText,
@@ -36,4 +37,24 @@ export default function Select({
       <FormHelperText>{helperText}</FormHelperText>
     </FormControl>
   )
+}
+
+Select.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  options: PropTypes.arrayOf(
+    PropTypes.exact({
+      label: PropTypes.string,
+      vallue: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    })
+  ),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  onChange: PropTypes.func,
+  error: PropTypes.bool,
+  helperText: PropTypes.node
+}
+
+Select.defaultProps = {
+  options: []
 }

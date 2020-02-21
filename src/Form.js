@@ -143,26 +143,26 @@ export default function Form() {
         <Skill
           name="strength"
           points={state.strength}
-          minPoints={SKILL_BASE_POINTS}
-          availablePoints={state.skillPoints}
           onAdd={incrementSkill}
           onRemove={decrementSkill}
+          disableRemove={state.strength === SKILL_BASE_POINTS}
+          disableAdd={state.skillPoints === 0}
         />
         <Skill
           name="dexterity"
           points={state.dexterity}
-          minPoints={SKILL_BASE_POINTS}
-          availablePoints={state.skillPoints}
           onAdd={incrementSkill}
           onRemove={decrementSkill}
+          disableRemove={state.dexterity === SKILL_BASE_POINTS}
+          disableAdd={state.skillPoints === 0}
         />
         <Skill
           name="intelligence"
           points={state.intelligence}
-          minPoints={SKILL_BASE_POINTS}
-          availablePoints={state.skillPoints}
           onAdd={incrementSkill}
           onRemove={decrementSkill}
+          disableRemove={state.intelligence === SKILL_BASE_POINTS}
+          disableAdd={state.skillPoints === 0}
         />
         <Button
           variant="contained"
