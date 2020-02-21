@@ -18,13 +18,14 @@ export default function Select({
   error,
   helperText
 }) {
+  const labelId = `${id || label}-label`
   return (
     <FormControl error={error}>
-      <InputLabel id={`${id || label}-label`}>{label}</InputLabel>
+      <InputLabel id={labelId}>{label}</InputLabel>
       <SelectMUI
         id={id}
         name={name}
-        labelId={`${id || label}-label`}
+        labelId={labelId}
         value={value}
         onChange={onChange}
       >
@@ -40,7 +41,7 @@ export default function Select({
 }
 
 Select.propTypes = {
-  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   options: PropTypes.arrayOf(
