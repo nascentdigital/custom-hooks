@@ -20,92 +20,17 @@ const form = css`
   }
 `
 
+const AVAILABLE_POINTS = 7
 const SKILL_BASE_POINTS = 5
 
-const formFields = [
-  { name: 'name', required: true },
-  { name: 'class', required: true },
-  {
-    name: 'skillPoints',
-    initialValue: 7,
-    validate: value => {
-      if (value > 0) {
-        return {
-          pass: false,
-          errorMessage: 'You must spend all skill points.'
-        }
-      }
-      return {
-        pass: true
-      }
-    }
-  },
-  { name: 'strength', initialValue: SKILL_BASE_POINTS },
-  { name: 'dexterity', initialValue: SKILL_BASE_POINTS },
-  { name: 'intelligence', initialValue: SKILL_BASE_POINTS }
-]
-
-const customReducer = (state, action) => {
-  switch (action.type) {
-    case 'UPDATE_FIELD': {
-      const { name, value } = action
-      return { ...state, [name]: value }
-    }
-    case 'INCREMENT_SKILL': {
-      const { name } = action
-      return {
-        ...state,
-        skillPoints: state.skillPoints - 1,
-        [name]: state[name] + 1
-      }
-    }
-    case 'DECREMENT_SKILL': {
-      const { name } = action
-      return {
-        ...state,
-        skillPoints: state.skillPoints + 1,
-        [name]: state[name] - 1
-      }
-    }
-    default:
-      throw new Error('invalid action type for reducer')
-  }
-}
-
 export default function Form() {
-  const [state, dispatch, isValid, errors] = useForm(formFields, {
-    customReducer
-  })
-  const updateField = e => {
-    const { name, value } = e.target
-    dispatch({
-      type: 'UPDATE_FIELD',
-      name,
-      value
-    })
-  }
-  const incrementSkill = name => {
-    dispatch({
-      type: 'INCREMENT_SKILL',
-      name
-    })
-  }
-  const decrementSkill = name => {
-    dispatch({
-      type: 'DECREMENT_SKILL',
-      name
-    })
-  }
+  // TODO - form state / logic / etc.
 
   const [submitted, setSubmitted] = useState(false)
   const [showErrors, setShowErrors] = useState(false)
   const handleSubmit = e => {
     e.preventDefault()
-    if (isValid) {
-      setSubmitted(true)
-    } else {
-      setShowErrors(true)
-    }
+    // TODO - if form is valid, set 'submitted' to true, otherwise set 'showErrors' to true
   }
 
   return (
@@ -115,54 +40,48 @@ export default function Form() {
         <TextField
           name="name"
           label="Name"
-          value={state.name}
-          onChange={updateField}
-          error={showErrors && !!errors.name}
-          helperText={showErrors && errors.name}
+          value={undefined}
+          onChange={undefined}
+          error={undefined} // passing in true will change the appearance of this input to be in an error state
+          helperText={undefined} // either the helper text or the error message if error is true
         />
         <Select
           name="class"
           label="Class"
-          options={[
-            { label: 'Barbarian', value: 1 },
-            { label: 'Cleric', value: 2 },
-            { label: 'Ranger', value: 3 },
-            { label: 'Rogue', value: 4 },
-            { label: 'Sorcerer', value: 5 }
-          ]}
-          value={state.class}
-          onChange={updateField}
-          error={showErrors && !!errors.class}
-          helperText={showErrors && errors.class}
+          options={undefined} // an array of objects with properties label and value
+          value={undefined} // the selected value
+          onChange={undefined}
+          error={undefined}
+          helperText={undefined}
         />
         <SkillPoints
-          points={state.skillPoints}
-          error={showErrors && !!errors.skillPoints}
-          helperText={showErrors && errors.skillPoints}
+          points={undefined} // available points left to spend
+          error={undefined}
+          helperText={undefined}
         />
         <Skill
           name="strength"
-          points={state.strength}
-          onAdd={incrementSkill}
-          onRemove={decrementSkill}
-          disableRemove={state.strength === SKILL_BASE_POINTS}
-          disableAdd={state.skillPoints === 0}
+          points={undefined}
+          onAdd={undefined}
+          onRemove={undefined}
+          disableRemove={undefined}
+          disableAdd={undefined}
         />
         <Skill
           name="dexterity"
-          points={state.dexterity}
-          onAdd={incrementSkill}
-          onRemove={decrementSkill}
-          disableRemove={state.dexterity === SKILL_BASE_POINTS}
-          disableAdd={state.skillPoints === 0}
+          points={undefined}
+          onAdd={undefined}
+          onRemove={undefined}
+          disableRemove={undefined}
+          disableAdd={undefined}
         />
         <Skill
           name="intelligence"
-          points={state.intelligence}
-          onAdd={incrementSkill}
-          onRemove={decrementSkill}
-          disableRemove={state.intelligence === SKILL_BASE_POINTS}
-          disableAdd={state.skillPoints === 0}
+          points={undefined}
+          onAdd={undefined}
+          onRemove={undefined}
+          disableRemove={undefined}
+          disableAdd={undefined}
         />
         <Button
           variant="contained"
