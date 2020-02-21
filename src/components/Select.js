@@ -57,5 +57,6 @@ Select.propTypes = {
 }
 
 Select.defaultProps = {
+  value: '',
   options: []
 }

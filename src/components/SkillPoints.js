@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Typography, FormHelperText } from '@material-ui/core'
 
 export default function SkillPoints({ points, error, helperText }) {
@@ -26,4 +27,10 @@ export default function SkillPoints({ points, error, helperText }) {
       )}
     </div>
   )
+}
+
+SkillPoints.propTypes = {
+  points: PropTypes.number.isRequired,
+  error: PropTypes.bool,
+  helperText: PropTypes.node
 }
